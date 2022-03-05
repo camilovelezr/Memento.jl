@@ -51,8 +51,8 @@ function config!(
 end
 
 function config!(
-    logger::Logger, level::AbstractString;
-    fmt::DefaultFormatter, levels=_log_levels, colorized=true,
+    logger::Logger, level::AbstractString,
+    fmt::DefaultFormatter; levels=_log_levels, colorized=true,
     recursive=false, substitute=false, propagate=true
 )
     logger.levels = levels
