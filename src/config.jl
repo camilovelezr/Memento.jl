@@ -58,7 +58,11 @@ function config!(
     logger.levels = levels
     setlevel!(logger, level; recursive=recursive)
     setpropagating!(logger, propagate)
-    handler = fmt
+    handler = DefaultHandler(
+        stdout,
+        fmt,
+        Dict{Symbol, Any}(:is_colorized => colorized),
+    )
     logger.handlers["console"] = handler
     register(logger)
 
