@@ -50,6 +50,23 @@ function config!(
     return logger
 end
 
+function config!(
+    logger::Logger, level::AbstractString;
+    fmt::DefaultFormatter, levels=_log_levels, colorized=true,
+    recursive=false, substitute=false, propagate=true
+)
+    logger.levels = levels
+    setlevel!(logger, level; recursive=recursive)
+    setpropagating!(logger, propagate)
+    handler = fmt
+    logger.handlers["console"] = handler
+    register(logger)
+
+    substitute && substitute!()
+
+    return logger
+end
+
 """
     reset!()
 
